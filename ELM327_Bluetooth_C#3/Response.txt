@@ -1,0 +1,37 @@
+AT Z -> ELM327 v1.5
+AT I -> 
+>ELM327 v1.5
+AT DP -> 
+>AUTO
+AT DPN -> 
+>A0
+AT L1 -> 
+>OK
+AT AL -> 
+>OK
+AT RV -> 
+>11.9V
+AT SP6 -> 
+>OK
+AT CS -> 
+>OK
+AT BD -> 
+>OK
+AT PPS -> 
+>00:FF F  01:00 N  02:FF F  03:32 F  
+04:01 F  05:FF F  06:F1 F  07:09 F  
+08:FF F  09:00 N  0A:0A F  0B:FF F  
+0C:68 F  0D:0D N  0E:9A F  0F:FF F  
+10:0D F  11:00 N  12:FF F  13:32 F  
+14:FF F  15:0A N  16:FF F  17:92 F  
+18:00 F  19:28 N  1A:FF F  1B:FF F  
+1C:FF F  1D:FF N  1E:FF F  1F:FF F  
+20:FF F  21:FF N  22:FF F  23:FF F  
+24:00 F  25:00 N  26:00 F  27:FF F  
+28:FF F  29:FF N  2A:38 F  2B:02 F  
+2C:E0 F  2D:04 N  2E:80 F  2F:0A F  
+
+AT SP0 -> 
+>OK
+01 00 -> 
+>SEARCHING...
