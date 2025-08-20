@@ -1,0 +1,148 @@
+﻿global using QuestPDF.Fluent;
+global using QuestPDF.Helpers;
+global using QuestPDF.Infrastructure;
+global using System.IO;
+global using System.IO.Ports;
+using System;
+using System.Linq;
+using System.Reflection.Metadata;
+
+// Explicitly alias the QuestPDF Document to avoid ambiguity
+using QuestPdfDocument = QuestPDF.Fluent.Document;
+
+
+internal class Program
+{
+    static void Main()
+    {
+        QuestPDF.Settings.License = LicenseType.Community;
+
+        string[] ports = SerialPort.GetPortNames();
+        if (ports.Length == 0)
+        {
+            Console.WriteLine("Nincs elérhető COM port a gépen.");
+            Console.ReadKey();
+            return;
+        }
+
+        bool sikeresKapcsolodas = false;
+        string responseFile = "Response.txt";
+        string pdfFile = "Response.pdf";
+
+        foreach (string port in ports)
+        {
+            using (SerialPort serialPort = new SerialPort(port))
+            {
+                serialPort.BaudRate = 115200;
+                serialPort.DataBits = 8;
+                serialPort.Parity = Parity.None;
+                serialPort.StopBits = StopBits.One;
+                serialPort.Handshake = Handshake.None;
+                serialPort.ReadTimeout = 2000;
+                serialPort.WriteTimeout = 2000;
+                serialPort.NewLine = "\r";
+                try
+                {
+                    serialPort.Open();
+                    Console.WriteLine($"Sikeresen kapcsolódtunk a {port} porthoz.");
+                    Console.ReadKey();
+                    sikeresKapcsolodas = true;
+
+                    if (File.Exists("ELM327_parancsok_alkalmaz.txt"))
+                    {
+                        string[] atParancsok = File.ReadAllLines("ELM327_parancsok_alkalmaz.txt");
+
+                        using (StreamWriter sw = new StreamWriter(responseFile, false))
+                        {
+                            foreach (string parancs in atParancsok)
+                            {
+                                if (string.IsNullOrWhiteSpace(parancs))
+                                    continue;
+                                serialPort.Write(parancs + "\r");
+                                Console.WriteLine($">>> Küldve: {parancs}");
+                                try
+                                {
+                                    string valasz = serialPort.ReadLine();
+                                    Console.WriteLine($"<<< Válasz: {valasz}");
+                                    sw.WriteLine($"{parancs} -> {valasz}");
+                                }
+                                catch (TimeoutException)
+                                {
+                                    Console.WriteLine("<<< Válasz timeout.");
+                                    Console.ReadKey();
+                                    sw.WriteLine($"{parancs} -> (timeout)");
+                                }
+                                System.Threading.Thread.Sleep(10);
+                            }
+                        }
+                        
+                        // PDF generálás a Response.txt tartalmából
+                        CreatePdfFromTextFile(responseFile, pdfFile);
+
+                        Console.WriteLine($"PDF riport létrehozva: {pdfFile}");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Az 'ELM327_parancsok_alkalmaz.txt' fájl nem található.");
+                        Console.ReadKey();
+                    }
+
+                    serialPort.Close();
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Nem sikerült kapcsolódni a {port} porthoz. Hiba: {ex.Message}");
+                    Console.ReadKey();
+                }
+            }
+        }
+
+        if (!sikeresKapcsolodas)
+        {
+            Console.WriteLine("Nem sikerült egyetlen COM porthoz sem kapcsolódni.");
+            Console.ReadKey();
+        }
+    }
+
+    static void CreatePdfFromTextFile(string textFilePath, string pdfFilePath)
+    {
+        string[] lines = File.ReadAllLines(textFilePath);
+
+        var document = QuestPdfDocument.Create(container =>
+        {
+            container.Page(page =>
+            {
+                page.Margin(40);
+
+                page.Header().Element(header =>
+                {
+                    header.Row(row =>
+                    {
+                        row.RelativeItem().AlignLeft().Text(DateTime.Now.ToString("yyyy-MM-dd")).FontSize(10);
+                        row.RelativeItem().AlignCenter().Text("OBD report").FontSize(16).Bold();
+                        row.RelativeItem().AlignRight().Text("by Csaba Jozsi").FontSize(10);
+                    });
+                });
+
+                page.Content().Column(col =>
+                {
+                    foreach (var line in lines)
+                    {
+                        col.Item().Text(line).FontSize(12);
+                    }
+                });
+
+                page.Footer().AlignCenter().Text(x =>
+                {
+                    x.CurrentPageNumber().FontSize(10);
+                    x.Span(" / ").FontSize(10);
+                    x.TotalPages().FontSize(10);
+                });
+            });
+        });
+
+        document.GeneratePdf(pdfFilePath);
+    }
+}
