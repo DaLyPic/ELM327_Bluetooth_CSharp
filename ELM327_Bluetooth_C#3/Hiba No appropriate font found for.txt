@@ -1,0 +1,4 @@
+Hiba: No appropriate font found for family name 'Verdana'. Implement IFontResolver and assign to 'GlobalFontSettings.FontResolver' to use fonts. See https://docs.pdfsharp.net/link/font-resolving.html
+
+Sikeresen kapcsolódtunk a COM6 porthoz.
+Nem sikerült kapcsolódni a COM6 porthoz. Hiba: The write timed out.
