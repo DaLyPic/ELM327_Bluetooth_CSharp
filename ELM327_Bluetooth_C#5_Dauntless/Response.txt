@@ -1,0 +1,74 @@
+DD WD -> ESP-ROM:esp32c3-api1-20210207 | 
+Build:Feb  7 2021 | 
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x9 (SPI_FAST_FLASH_BOOT) | 
+Saved PC:0x400462e2 | 
+SPIWP:0xee | 
+mode:DIO, clock div:1 | 
+load:0x3fcd5990,len:0x19f8 | 
+load:0x403cc710,len:0x93c | 
+load:0x403ce710,len:0x4274 | 
+entry 0x403cc710 | 
+[0;31mE (359) esp_timer: Task is already initialized[0m | 
+DD WD | OK
+ATSP A6 -> 
+>ATSP A6 | 
+OK
+DD HW -> 
+>DD HW | 
+FW Program: 2200 (DauntlessOBD) | 
+FW Version: 1.11.1 | 
+FW Platform: 2020 | 
+HW Board: AIOE | 
+HW Version: 1.05 | 
+HW Config U: 04000021 | 
+HW Config P: 00000000
+DD I -> 
+>DD I | 
+DauntlessOBD v1.11.1
+DD PWR -> 
+>DD PWR | 
+11.4 V
+DD SN -> 
+>DD SN | 
+6B5BBC1C9AC9928A
+DD ECU -> 
+>DD ECU | 
+?
+DI PQ -> (timeout)
+DI VIN -> 
+AFRC: O, Air/Fuel Ratio - Commanded | 
+AIRT: O, Ambient Air Temperature | 
+APPD: O, Accelerator Pedal Position D | 
+BARO: O, Barometric Pressure | 
+CT11: O, Catalyst Temperature - B1S1 | 
+CT12: O, Catalyst Temperature - B1S2 | 
+ECT: O, Engine Coolant Temperature | 
+EVPC: O, EVAP Purge Commanded | 
+FLVL: O, Fuel Level | 
+FTS1: O, Fuel Trim - Short Term - Bank 1 | 
+FTL1: O, Fuel Trim - Long Term - Bank 1 | 
+IAT: O, Intake Air Temperature | 
+IGN: O, Ignition Timing Advance | 
+LDC: O, Calculated Engine Load | 
+MAP: O, Manifold Absolute Pressure | 
+MILD: O, Distance with MIL On | 
+O2V1: O, O2 Sensor Voltage - B1S1 | 
+O2V2: O, O2 Sensor Voltage - B1S2 | 
+RPM: O, Engine RPM | 
+SPD: O, Vehicle Speed | 
+TPS: O, Throttle Position Sensor | 
+VOLI: A, Interface Voltage | 
+VOLT: O, ECU Voltage
+DD CT -> 
+>DI VIN | 
+WF0DXXGAKDGS41007 | 
+Ford
+AT @1 -> 
+>DD CT | 
+35.9 C
+AT @2 -> 
+>AT @1 | 
+Dauntless Devices OBD-II Interpreter
+DD TR -> 
+>AT @2 | 
+BC1C9AC9928A
