@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELM327_Bluetooth_C#", "ELM327_Bluetooth_C#.csproj", "{034FBBB5-79D0-4223-9797-F559048E385F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELM327_Bluetooth_C#2", "..\ELM327_Bluetooth_C#2\ELM327_Bluetooth_C#2.csproj", "{1DDC123C-1C3A-452C-857C-FDF118B45A7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELM327_Bluetooth_C#3", "..\ELM327_Bluetooth_C#3\ELM327_Bluetooth_C#3.csproj", "{B0A99EAA-3178-451E-A1A8-AF493BE9002E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELM327_Bluetooth_C#4", "..\ELM327_Bluetooth_C#4\ELM327_Bluetooth_C#4.csproj", "{CBE15574-9337-464D-9437-6FAA1BFE65AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{034FBBB5-79D0-4223-9797-F559048E385F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{034FBBB5-79D0-4223-9797-F559048E385F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{034FBBB5-79D0-4223-9797-F559048E385F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{034FBBB5-79D0-4223-9797-F559048E385F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DDC123C-1C3A-452C-857C-FDF118B45A7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DDC123C-1C3A-452C-857C-FDF118B45A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DDC123C-1C3A-452C-857C-FDF118B45A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DDC123C-1C3A-452C-857C-FDF118B45A7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0A99EAA-3178-451E-A1A8-AF493BE9002E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0A99EAA-3178-451E-A1A8-AF493BE9002E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0A99EAA-3178-451E-A1A8-AF493BE9002E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0A99EAA-3178-451E-A1A8-AF493BE9002E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBE15574-9337-464D-9437-6FAA1BFE65AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBE15574-9337-464D-9437-6FAA1BFE65AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBE15574-9337-464D-9437-6FAA1BFE65AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBE15574-9337-464D-9437-6FAA1BFE65AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8795A461-E646-4430-9E84-F1C57BC1337B}
+	EndGlobalSection
+EndGlobal

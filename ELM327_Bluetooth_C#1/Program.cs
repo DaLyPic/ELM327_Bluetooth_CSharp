@@ -1,0 +1,77 @@
+﻿using System;
+using System.IO.Ports;
+
+class Elm327AtSender
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("ELM327 AT parancsküldő program");
+
+        // COM port megadása
+        Console.Write("Add meg az ELM327 eszköz COM portját (pl. COM5): ");
+        string comPort = Console.ReadLine();
+
+        // Soros port beállítása
+        SerialPort serialPort = new SerialPort();
+        serialPort.PortName = comPort;
+        serialPort.BaudRate = 115200; // vagy 9600, amilyen az eszközöd //38400 //115200
+        serialPort.DataBits = 8;
+        serialPort.Parity = Parity.None;
+        serialPort.StopBits = StopBits.One;
+        serialPort.Handshake = Handshake.None;
+        serialPort.NewLine = "\r"; // ELM327 AT parancsok CR-rel végződnek
+
+        try
+        {
+            serialPort.Open();
+            Console.WriteLine($"Kapcsolódva a {comPort} porthoz.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Nem sikerült megnyitni a soros portot: " + ex.Message);
+            Console.ReadKey();
+            return;
+        }
+
+        Console.WriteLine("Írd be az AT parancsokat, majd Enter.");
+        Console.WriteLine("Kilépéshez írd be: exit");
+
+        while (true)
+        {
+            Console.Write("AT parancs: ");
+            string command = Console.ReadLine();
+
+            if (command.Trim().ToLower() == "exit")
+                break;
+
+            // Az ELM327 igényli a CR (carriage return) karaktert a parancs végén
+            if (!command.EndsWith("\r"))
+                command += "\r";
+
+            try
+            {
+                // Parancs elküldése
+                serialPort.Write(command);
+
+                // Válasz olvasása (az ELM327 általában '>' jelzéssel jelez, hogy készen áll)
+                string response = serialPort.ReadLine();
+                Console.WriteLine("Válasz: " + response);
+            }
+            catch (TimeoutException)
+            {
+                Console.WriteLine("Időtúllépés - nem érkezett válasz.");
+                Console.ReadKey();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hiba az adatküldés/olvasás során: " + ex.Message);
+                Console.ReadKey();
+            }
+        }
+
+        serialPort.Close();
+        Console.WriteLine("Kapcsolat lezárva, program vége.");
+        Console.ReadKey();
+    }  
+}
+
